@@ -1,5 +1,7 @@
 package dev.wcs.sea.trainingplanner.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.time.LocalDate;
 import java.util.List;
 

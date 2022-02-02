@@ -1,9 +1,15 @@
 package dev.wcs.sea.trainingplanner.entities;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.time.LocalDate;
 
+@Entity
 public class Student {
 
+    @Id
+    @GeneratedValue
     private Long id;
     private String firstName;
     private String lastName;

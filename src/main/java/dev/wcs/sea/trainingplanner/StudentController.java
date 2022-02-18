@@ -21,6 +21,11 @@ public class StudentController {
 		List<Student> students  = new ArrayList<>();
 		Student student1 = new Student(1l,"Fritz", "Meier", LocalDate.now());
 		students.add(student1);
+		//		2. Studenten reinbringen (LK)
+		Student student2 = new Student(2l,"Horst", "Scholz", LocalDate.now());
+		students.add(student2);
+
+
 		return students;
 	}
 }

@@ -1,16 +1,21 @@
 package dev.wcs.sea.trainingplanner.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.time.LocalDate;
 import java.util.List;
 
+@Entity
 public class Training {
-
+    @Id
+    @GeneratedValue
     private Long id;
 
     private String title;
     private LocalDate startDate;
+    @OneToMany
     private List<Student> students;
 
     public Training(Long id, String title, LocalDate startDate) {

@@ -1,34 +1,12 @@
-package dev.wcs.sea.trainingplanner.entities;
+package dev.wcs.sea.trainingplanner.controller.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import java.time.LocalDate;
 
-@Entity
-public class Student {
+public class StudentDto {
 
-    @Id
-    @GeneratedValue
-    private Long id;
     private String firstName;
     private String lastName;
     private LocalDate birthDate;
-
-    public Student(Long id, String firstName, String lastName, LocalDate birthDate) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthDate = birthDate;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -53,4 +31,6 @@ public class Student {
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
+
+
 }

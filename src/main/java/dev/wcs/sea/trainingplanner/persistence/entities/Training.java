@@ -1,4 +1,4 @@
-package dev.wcs.sea.trainingplanner.entities;
+package dev.wcs.sea.trainingplanner.persistence.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,8 +18,7 @@ public class Training {
     @OneToMany
     private List<Student> students;
 
-    public Training(Long id, String title, LocalDate startDate) {
-        this.id = id;
+    public Training(String title, LocalDate startDate) {
         this.title = title;
         this.startDate = startDate;
     }

@@ -1,8 +1,6 @@
 package dev.wcs.sea.trainingplanner.controller;
 
-import dev.wcs.sea.trainingplanner.controller.dto.StudentDto;
 import dev.wcs.sea.trainingplanner.controller.dto.TrainingDto;
-import dev.wcs.sea.trainingplanner.persistence.entities.Student;
 import dev.wcs.sea.trainingplanner.persistence.entities.Training;
 import dev.wcs.sea.trainingplanner.persistence.repo.TrainingRepository;
 import org.springframework.http.ResponseEntity;
@@ -16,14 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-public class TrainingController<TrainingRepository> {
+public class TrainingController {
 
-    private final TrainingRepository TrainingRepository;
+    private final TrainingRepository trainingRepository;
 
     public TrainingController(TrainingRepository trainingRepository) {
-        this.TrainingRepository = trainingRepository;
-
-
+        this.trainingRepository = trainingRepository;
     }
 
     @GetMapping("/training_static")
@@ -41,7 +37,7 @@ public class TrainingController<TrainingRepository> {
 
         Iterable<Training> trainingEntities = trainingRepository.findAll();
         List<TrainingDto> trainingsDto = new ArrayList<>();
-        trainingEntities.forEach( training -> {
+        trainingEntities.forEach(training -> {
                     TrainingDto sDto = new TrainingDto();
                     sDto.setTitle(training.getTitle());
                     sDto.setStartDate(training.getStartDate());
@@ -50,4 +46,15 @@ public class TrainingController<TrainingRepository> {
                 }
         );
         return trainingsDto;
+    }
+
+    // PostMapping auch analog zu student
+    @PostMapping("/training/create")
+	public ResponseEntity createTraining(@RequestBody TrainingDto trainingDto) {
+		Training training = new Training(trainingDto.getTitle(), trainingDto.getStartDate());
+		trainingRepository.save(training);
+		return ResponseEntity.ok().build();
+
+
 }
+    }

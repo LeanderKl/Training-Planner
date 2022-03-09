@@ -1,14 +1,9 @@
 package dev.wcs.sea.trainingplanner.controller;
 
-import dev.wcs.sea.trainingplanner.controller.dto.StudentDto;
 import dev.wcs.sea.trainingplanner.controller.dto.TrainingDto;
-import dev.wcs.sea.trainingplanner.persistence.entities.Student;
 import dev.wcs.sea.trainingplanner.persistence.entities.Training;
 import dev.wcs.sea.trainingplanner.persistence.repo.TrainingRepository;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
@@ -16,13 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-public class TrainingController<TrainingRepository> {
+public class TrainingController {
 
-    private final TrainingRepository TrainingRepository;
+    private final TrainingRepository trainingRepository;
 
     public TrainingController(TrainingRepository trainingRepository) {
-        this.TrainingRepository = trainingRepository;
-
+        this.trainingRepository = trainingRepository;
 
     }
 
@@ -41,7 +35,7 @@ public class TrainingController<TrainingRepository> {
 
         Iterable<Training> trainingEntities = trainingRepository.findAll();
         List<TrainingDto> trainingsDto = new ArrayList<>();
-        trainingEntities.forEach( training -> {
+        trainingEntities.forEach(training -> {
                     TrainingDto sDto = new TrainingDto();
                     sDto.setTitle(training.getTitle());
                     sDto.setStartDate(training.getStartDate());
@@ -50,4 +44,5 @@ public class TrainingController<TrainingRepository> {
                 }
         );
         return trainingsDto;
+    }
 }

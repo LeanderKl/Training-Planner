@@ -44,6 +44,7 @@ public class StudentController {
 		List<StudentDto> studentsDto = new ArrayList<>();
 		studentEntities.forEach( student -> {
 				StudentDto sDto = new StudentDto();
+				sDto.setId(student.getId());
 				sDto.setFirstName(student.getFirstName());
 				sDto.setLastName(student.getLastName());
 				sDto.setBirthDate(student.getBirthDate());

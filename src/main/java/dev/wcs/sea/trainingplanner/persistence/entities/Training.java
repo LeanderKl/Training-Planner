@@ -18,6 +18,8 @@ public class Training {
     @OneToMany
     private List<Student> students;
 
+    public Training() {}
+
     public Training(String title, LocalDate startDate) {
         this.title = title;
         this.startDate = startDate;

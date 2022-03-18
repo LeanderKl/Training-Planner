@@ -70,9 +70,19 @@ public class TrainingController {
     @PostMapping("/training/{trainingId}/assignStudent/{studentId}")
     public ResponseEntity createTraining(@PathVariable Long trainingId, @PathVariable Long studentId) {
         // Use trainingRepository to find the training by Id
+        //18.03.2022 done by LK as follows next line
+        Training training = trainingRepository.findById(trainingId).get();
         // Use studentRepository to find student by Id
+        //18.03.2022 done by LK as follows next line
+        Student student = studentRepository.findById(studentId).get();
         // Use getStudents method on training to add the student
+        //18.03.2022 done whats written above by LK
+        training.getStudents().add(student);
         // Call trainingRepository with save to store updated training
+        //18.03.2022 done by LK as follows next line
+        trainingRepository.save(training);
+
+
         return ResponseEntity.ok().build();
     }
 

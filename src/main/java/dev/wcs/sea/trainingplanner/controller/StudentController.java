@@ -60,7 +60,7 @@ public class StudentController {
 
    // LK 21.03.2022
 	// einzelnen Studenten löschen; delete single student after finding him/her by ID
-	@PostMapping("/student/delete/{id}")
+	@DeleteMapping("/student/delete/{id}")
 	public ResponseEntity deleteStudent(@PathVariable("id") Long studentId) {
 		Student student = studentRepository.findById(studentId).get();
 		studentRepository.delete(student);

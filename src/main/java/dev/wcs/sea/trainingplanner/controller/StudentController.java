@@ -4,10 +4,7 @@ import dev.wcs.sea.trainingplanner.controller.dto.StudentDto;
 import dev.wcs.sea.trainingplanner.persistence.entities.Student;
 import dev.wcs.sea.trainingplanner.persistence.repo.StudentRepository;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -63,17 +60,14 @@ public class StudentController {
 
    // LK 21.03.2022
 	// einzelnen Studenten löschen; delete single student after finding him/her by ID
-	@PostMapping("/student/delete")
-	public ResponseEntity deleteStudent(@RequestBody StudentDto studentDto) {
-
-	Student student = studentRepository.findById(studentId);
+	@PostMapping("/student/delete/{id}")
+	public ResponseEntity deleteStudent(@PathVariable("id") Long studentId) {
+		Student student = studentRepository.findById(studentId).get();
 		studentRepository.delete(student);
 	// what shall be returned?? LK
 	//	return ResponseEntity.ok().delete();
 	//	return studentsDto;
 		return ResponseEntity.ok().build();
-
-
 	}
 
 

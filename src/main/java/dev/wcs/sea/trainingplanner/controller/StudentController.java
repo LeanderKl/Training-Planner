@@ -61,8 +61,20 @@ public class StudentController {
 		return ResponseEntity.ok().build();
 	}
 
+   // LK 21.03.2022
+	// einzelnen Studenten löschen; delete single student after finding him/her by ID
+	@PostMapping("/student/delete")
+	public ResponseEntity deleteStudent(@RequestBody StudentDto studentDto) {
+
+	Student student = studentRepository.findById(studentId);
+		studentRepository.delete(student);
+	// what shall be returned?? LK
+	//	return ResponseEntity.ok().delete();
+	//	return studentsDto;
+		return ResponseEntity.ok().build();
 
 
+	}
 
 
 

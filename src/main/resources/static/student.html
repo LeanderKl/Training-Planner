@@ -1,0 +1,89 @@
+
+<script type="importmap">
+    {
+      "imports": {
+        "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+      }
+    }
+</script>
+
+<script type="module">
+    import { createApp } from 'vue'
+
+    const API_URL = `http://localhost:8080/student`
+
+    createApp({
+      data: () => ({
+        students: null
+      }),
+
+      created() {
+        // fetch on init
+        this.fetchData()
+      },
+
+      methods: {
+        async fetchData() {
+          const url = `${API_URL}`
+          this.students = await (await fetch(url)).json()
+        }
+      }
+    }).mount('#app')
+</script>
+
+<div id="app">
+    <h1>Stored Students another change, das kommt noch</h1>
+    <ul>
+        // <li v-for="{ title, startDate } in trainings">
+        <li v-for="{ firstName, lastName, birthDate } in students">
+            //    <span class="message">{{ title }} starting on {{ startDate }}</span>
+            <span class="message">{{ firstName }} {{ lastName }} ** {{ birthDate }}</span>
+        </li>
+    </ul>
+</div>
+
+
+
+
+/*<script type="importmap">
+    {
+      "imports": {
+        "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+      }
+    }
+</script>
+
+<script type="module">
+    import { createApp } from 'vue'
+
+    const API_URL = `http://localhost:8080/student`
+
+    createApp({
+      data: () => ({
+        trainings: null
+      }),
+
+      created() {
+        // fetch on init
+        this.fetchData()
+      },
+
+      methods: {
+        async fetchData() {
+          const url = `${API_URL}`
+          this.trainings = await (await fetch(url)).json()
+        }
+      }
+    }).mount('#app')
+</script>
+
+<div id="app">
+    <h1>Stored Students Anzeige another change</h1>
+    <ul>
+        <li v-for="{ title, startDate } in trainings">
+            <span class="message">{{ title }} starting on {{ startDate }}</span>
+        </li>
+    </ul>
+</div>
+*/
+//LK 30.03.2022 der Inhalt von training.html und student.html waren vertauscht

@@ -86,5 +86,16 @@ public class TrainingController {
         return ResponseEntity.ok().build();
     }
 
+// LK 21.03.2022
+    // einzelnes Training löschen; delete single training after finding it by ID
+	/*@PostMapping("/training/delete")
+	public ResponseEntity deleteTraining(@RequestBody TrainingDto trainingDto) {
+
+	Training training = trainingRepository.findById(trainingId);
+		trainingRepository.delete(training);
+		return ResponseEntity.ok().delete();
+	}
+
+	*/
 
 }

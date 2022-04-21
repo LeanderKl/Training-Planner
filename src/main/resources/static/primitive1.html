@@ -27,7 +27,7 @@ const API_URL = `http://localhost:8080/studentarray`
 createApp({
   data() {
     return {
-      trainings: null,
+      students: null,
       selected: '',
       prefix: '',
       first: '',
@@ -39,41 +39,41 @@ createApp({
         this.fetchData()
   },
   computed: {
-    filteredTrainings() {
-      return this.trainings.filter((n) =>
+    filteredStudents() {
+      return this.students.filter((n) =>
         n.toLowerCase().startsWith(this.prefix.toLowerCase())
       )
     }
   },
   watch: {
-    selected(training) {
-      ;[this.last, this.first] = training.split(', ')
+    selected(student) {
+      ;[this.last, this.first] = student.split(', ')
     }
   },
   methods: {
     async fetchData() {
           const url = `${API_URL}`
-          this.trainings = await (await fetch(url)).json()
+          this.students = await (await fetch(url)).json()
     },
     create() {
       if (this.hasValidInput()) {
         const fullName = `${this.last}, ${this.first}`
-        if (!this.trainings.includes(fullName)) {
-          this.trainings.push(fullName)
+        if (!this.students.includes(fullName)) {
+          this.students.push(fullName)
           this.first = this.last = ''
         }
       }
     },
     update() {
       if (this.hasValidInput() && this.selected) {
-        const i = this.trainings.indexOf(this.selected)
-        this.trainings[i] = this.selected = `${this.last}, ${this.first}`
+        const i = this.students.indexOf(this.selected)
+        this.students[i] = this.selected = `${this.last}, ${this.first}`
       }
     },
     del() {
       if (this.selected) {
         const i = this.names.indexOf(this.selected)
-        this.trainings.splice(i, 1)
+        this.students.splice(i, 1)
         this.selected = this.first = this.last = ''
       }
     },
@@ -89,14 +89,14 @@ createApp({
     <div><input placeholder="Filter prefix" v-model="prefix"></div>
 
     <select size="5" v-model="selected">
-        <option v-for="training in filteredTrainings">{{ training }}</option>
+        <option v-for="student in filteredStudents">{{ student }}</option>
     </select>
 
     <label>Name: <input v-model="first"></label>
     <label>Surname: <input v-model="last"></label>
 
     <div class="buttons">
-        <button @click="create">Create Person</button>
+        <button @click="create">Create Student</button>
         <button @click="update">Update</button>
         <button @click="del">Delete</button>
     </div>

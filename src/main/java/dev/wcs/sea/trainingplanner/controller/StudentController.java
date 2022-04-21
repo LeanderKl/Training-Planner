@@ -51,6 +51,16 @@ public class StudentController {
 		return studentsDto;
 	}
 
+	@GetMapping("/studentarray")
+	public List<String> studentarray() {
+		Iterable<Student> studentEntities = studentRepository.findAll();
+		List<String> studentsDto = new ArrayList<>();
+		studentEntities.forEach( student -> {
+					studentsDto.add(student.getLastName() + ", " + student.getFirstName());
+				}
+		);
+		return studentsDto;
+	}
 	@PostMapping("/student/create")
 	public ResponseEntity createStudent(@RequestBody StudentDto studentDto) {
 		Student student = new Student(studentDto.getFirstName(), studentDto.getLastName(), studentDto.getBirthDate());

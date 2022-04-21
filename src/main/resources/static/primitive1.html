@@ -16,20 +16,27 @@
         "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
       }
     }
+
 </script>
 
 <script type="module">
 import { createApp } from 'vue'
 
+const API_URL = `http://localhost:8080/studentarray`
+
 createApp({
   data() {
     return {
-      trainings: ['Training, Java', 'Training, .NET', 'Training, Python'],
+      trainings: null,
       selected: '',
       prefix: '',
       first: '',
       last: ''
     }
+  },
+  created() {
+        // fetch on init
+        this.fetchData()
   },
   computed: {
     filteredTrainings() {
@@ -44,6 +51,10 @@ createApp({
     }
   },
   methods: {
+    async fetchData() {
+          const url = `${API_URL}`
+          this.trainings = await (await fetch(url)).json()
+    },
     create() {
       if (this.hasValidInput()) {
         const fullName = `${this.last}, ${this.first}`
@@ -71,10 +82,11 @@ createApp({
     }
   }
 }).mount('#app')
+
 </script>
 
 <div id="app">
-    <div><input v-model="prefix" placeholder="Filter prefix"></div>
+    <div><input placeholder="Filter prefix" v-model="prefix"></div>
 
     <select size="5" v-model="selected">
         <option v-for="training in filteredTrainings">{{ training }}</option>

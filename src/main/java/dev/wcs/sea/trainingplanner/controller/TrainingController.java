@@ -82,6 +82,7 @@ public class TrainingController {
     }
 
 
+
     @PostMapping("/training/create")
     public ResponseEntity createTraining(@RequestBody TrainingDto trainingDto) {
         Training training = new Training(trainingDto.getTitle(), trainingDto.getStartDate());

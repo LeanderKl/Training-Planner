@@ -55,9 +55,4 @@ public class Student {
         this.birthDate = birthDate;
     }
 
-    public int getTitle() {
-    }
-
-    public int getStartDate() {
-    }
 }

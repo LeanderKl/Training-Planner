@@ -73,12 +73,13 @@ public class TrainingController {
     public List<String> trainingarray() {
         Iterable<Training> trainingEntities = trainingRepository.findAll();
         List<String> trainingsDto = new ArrayList<>();
-        trainingEntities.forEach( training -> {
+        trainingEntities.forEach(training -> {
                     trainingsDto.add(training.getTitle() + ", " + training.getStartDate());
                 }
         );
         return trainingsDto;
 // analog zu student   LK 09.03.2022
+    }
 
 
     @PostMapping("/training/create")

@@ -57,8 +57,29 @@ public class TrainingController {
         );
         return trainingsDto;
     }
+    // zusätzlicher (additioal) endpoint analog zu studentarray in StudentController.java   LK 22.04.2022@GetMapping("/studentarray")
+    //	public List<String> studentarray() {
+    //		Iterable<Student> studentEntities = studentRepository.findAll();
+    //		List<String> studentsDto = new ArrayList<>();
+    //		studentEntities.forEach( student -> {
+    //					studentsDto.add(student.getLastName() + ", " + student.getFirstName());
+    //				}
+    //		);
+    //		return studentsDto;
 
+
+
+    @GetMapping("/trainingarray")
+    public List<String> trainingarray() {
+        Iterable<Training> trainingEntities = trainingRepository.findAll();
+        List<String> trainingsDto = new ArrayList<>();
+        trainingEntities.forEach( training -> {
+                    trainingsDto.add(training.getTitle() + ", " + training.getStartDate());
+                }
+        );
+        return trainingsDto;
 // analog zu student   LK 09.03.2022
+
 
     @PostMapping("/training/create")
     public ResponseEntity createTraining(@RequestBody TrainingDto trainingDto) {

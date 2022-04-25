@@ -1,0 +1,107 @@
+<!-- automatisch generierter Code for HTML-file commented out
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html>
+until vorstehend automatisch generated, then primitive1 adapted for trainings (LK)
+-->
+
+<script type="importmap">
+    {
+      "imports": {
+        "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js"
+      }
+    }
+
+</script>
+
+<script type="module">
+import { createApp } from 'vue'
+
+const API_URL = `http://localhost:8080/trainingarray`
+
+createApp({
+  data() {
+    return {
+      trainings: null,
+      selected: '',
+      prefix: '',
+      first: '',
+      last: ''
+    }
+  },
+  created() {
+        // fetch on init
+        this.fetchData()
+  },
+  computed: {
+    filteredTrainings() {
+      return this.trainings.filter((n) =>
+        n.toLowerCase().startsWith(this.prefix.toLowerCase())
+      )
+    }
+  },
+  watch: {
+    selected(training) {
+      ;[this.last, this.first] = training.split(', ')
+    }
+  },
+  methods: {
+    async fetchData() {
+          const url = `${API_URL}`
+          this.trainings = await (await fetch(url)).json()
+    },
+    create() {
+      if (this.hasValidInput()) {
+        const fullName = `${this.last}, ${this.first}`
+        if (!this.students.includes(fullName)) {
+          this.students.push(fullName)
+          this.first = this.last = ''
+        }
+      }
+    },
+    update() {
+      if (this.hasValidInput() && this.selected) {
+        const i = this.students.indexOf(this.selected)
+        this.students[i] = this.selected = `${this.last}, ${this.first}`
+      }
+    },
+    del() {
+      if (this.selected) {
+        const i = this.names.indexOf(this.selected)
+        this.students.splice(i, 1)
+        this.selected = this.first = this.last = ''
+      }
+    },
+    hasValidInput() {
+      return this.first.trim() && this.last.trim()
+    }
+  }
+}).mount('#app')
+
+</script>
+
+<div id="app">
+    <div><input placeholder="Filter prefix" v-model="prefix"></div>
+
+    <select size="5" v-model="selected">
+        <option v-for="training in filteredTrainings">{{ training }}</option>
+    </select>
+
+    <label>Title: <input v-model="first"></label>
+    <label>StartDate: <input v-model="last"></label>
+
+    <div class="buttons">
+        <button @click="create">Create Training</button>
+        <button @click="update">Update</button>
+        <button @click="del">Delete</button>
+    </div>
+</div>
+
+

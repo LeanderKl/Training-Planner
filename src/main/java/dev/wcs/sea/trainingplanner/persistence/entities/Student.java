@@ -54,4 +54,10 @@ public class Student {
     public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
+
+    public int getTitle() {
+    }
+
+    public int getStartDate() {
+    }
 }

@@ -63,7 +63,8 @@ public class StudentController {
 	}
 	@PostMapping("/student/create")
 	public ResponseEntity createStudent(@RequestBody StudentDto studentDto) {
-		Student student = new Student(studentDto.getFirstName(), studentDto.getLastName(), studentDto.getBirthDate());
+		LocalDate birthDate = (studentDto.getBirthDate() == null) ? LocalDate.now() : studentDto.getBirthDate();
+		Student student = new Student(studentDto.getFirstName(), studentDto.getLastName(), birthDate);
 		studentRepository.save(student);
 		return ResponseEntity.ok().build();
 	}

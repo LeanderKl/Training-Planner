@@ -22,7 +22,8 @@
 <script type="module">
 import { createApp } from 'vue'
 
-const API_URL = `http://localhost:8080/studentarray`
+const API_URL_GET = `http://localhost:8080/studentarray`
+const API_URL_POST = `http://localhost:8080/student/create`
 
 createApp({
   data() {
@@ -52,14 +53,24 @@ createApp({
   },
   methods: {
     async fetchData() {
-          const url = `${API_URL}`
+          const url = `${API_URL_GET}`
           this.students = await (await fetch(url)).json()
+    },
+    pushData() {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ firstName: this.first, lastName: this.last })
+        };
+        fetch(API_URL_POST, requestOptions)
+            .then(response => response.json())
     },
     create() {
       if (this.hasValidInput()) {
         const fullName = `${this.last}, ${this.first}`
         if (!this.students.includes(fullName)) {
           this.students.push(fullName)
+          this.pushData()
           this.first = this.last = ''
         }
       }

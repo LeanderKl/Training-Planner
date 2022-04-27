@@ -23,8 +23,10 @@ until vorstehend automatisch generated, then primitive1 adapted for trainings (L
 
 <script type="module">
 import { createApp } from 'vue'
-
-const API_URL = `http://localhost:8080/trainingarray`
+//27.04.2022, LK: following: analog zu primitiveStudent.html angepasst
+//const API_URL = `http://localhost:8080/trainingarray`
+const API_URL_GET = `http://localhost:8080/trainingarray`
+const API_URL_POST = `http://localhost:8080/training/create`
 
 createApp({
   data() {
@@ -54,14 +56,31 @@ createApp({
   },
   methods: {
     async fetchData() {
-          const url = `${API_URL}`
+//27.04.2022, LK: following: analog zu primitiveStudent.html angepasst
+//        const url = `${API_URL}`
+          const url = `${API_URL_GET}`
+
           this.trainings = await (await fetch(url)).json()
     },
+
+     pushData() {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ title: this.title, startDate: this.startDate })
+        };
+        fetch(API_URL_POST, requestOptions)
+            .then(response => response.json())
+    },
+//27.04.2022, LK Ende
     create() {
       if (this.hasValidInput()) {
         const fullName = `${this.last}, ${this.first}`
         if (!this.students.includes(fullName)) {
           this.students.push(fullName)
+//27.04.2022, LK next line inserted
+          this.pushData()
+
           this.first = this.last = ''
         }
       }
@@ -94,8 +113,8 @@ createApp({
         <option v-for="training in filteredTrainings">{{ training }}</option>
     </select>
 
-    <label>Title: <input v-model="first"></label>
-    <label>StartDate: <input v-model="last"></label>
+    <label>Titel: <input v-model="last"></label>
+    <label>StartDate: <input v-model="first"></label>
 
     <div class="buttons">
         <button @click="create">Create Training</button>

@@ -67,7 +67,7 @@ createApp({
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ title: this.title, startDate: this.startDate })
+            body: JSON.stringify({ title: this.last, startDate: this.first })
         };
         fetch(API_URL_POST, requestOptions)
             .then(response => response.json())

@@ -76,8 +76,8 @@ createApp({
     create() {
       if (this.hasValidInput()) {
         const fullName = `${this.last}, ${this.first}`
-        if (!this.students.includes(fullName)) {
-          this.students.push(fullName)
+        if (!this.trainings.includes(fullName)) {
+          this.trainings.push(fullName)
 //27.04.2022, LK next line inserted
           this.pushData()
 
@@ -109,7 +109,7 @@ createApp({
 <div id="app">
     <div><input placeholder="Filter prefix" v-model="prefix"></div>
 
-    <select size="5" v-model="selected">
+    <select size="15" v-model="selected">
         <option v-for="training in filteredTrainings">{{ training }}</option>
     </select>
 
